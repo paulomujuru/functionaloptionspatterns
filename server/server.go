@@ -25,10 +25,17 @@ func WithTime(timeout time.Duration) Option {
 	}
 }
 
+func WithMaxConn(maxConn int) Option {
+	return func(s *Server) {
+		s.maxConn = maxConn
+	}
+}
+
 type Server struct {
 	host    string
 	port    int
 	timeout time.Duration
+	maxConn int
 }
 
 func New(option ...Option) *Server {
@@ -40,9 +47,9 @@ func New(option ...Option) *Server {
 }
 
 func (s *Server) Start() {
-	log.Printf("Server starting %#v/n", s)
+	log.Printf("Server starting %#v", s)
 }
 
 func (s *Server) Stop() {
-	log.Printf("Servers stopped %#v/n", s)
+	log.Printf("Servers stopped %#v", s)
 }

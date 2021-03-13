@@ -8,6 +8,7 @@ import (
 func main() {
 	srv := server.New(
 		server.WithHost("localhost"),
+		server.WithMaxConn(100),
 		server.WithPort(8080),
 		server.WithTime(time.Minute),
 	)
