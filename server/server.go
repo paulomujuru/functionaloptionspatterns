@@ -5,18 +5,34 @@ import (
 	"time"
 )
 
+type Option func(*Server)
+
+func WithHost(host string) Option {
+	return func(s *Server) {
+		s.host = host
+	}
+}
+
+func WithPort(port int) Option {
+	return func(s *Server) {
+		s.port = port
+	}
+}
+
+func WithTime(timeout time.Duration) Option {
+	return func(s *Server) {
+		s.timeout = timeout
+	}
+}
+
 type Server struct {
 	host    string
 	port    int
 	timeout time.Duration
 }
 
-func New(host string, port int, timeout time.Duration) *Server {
-	s := &Server{
-		host:    host,
-		port:    port,
-		timeout: timeout,
-	}
+func New(option ...Option) *Server {
+	s := &Server{}
 	return s
 }
 

@@ -6,8 +6,12 @@ import (
 )
 
 func main() {
-	srv := server.New("localhost", 8080, time.Minute)
+	srv := server.New(
+		server.WithHost("localhost"),
+		server.WithPort(8080),
+		server.WithTime(time.Minute),
+	)
 	srv.Start()
-	time.Sleep(time.Second)
+	time.Sleep(time.Minute)
 	srv.Stop()
 }
