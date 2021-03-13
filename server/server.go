@@ -33,6 +33,9 @@ type Server struct {
 
 func New(option ...Option) *Server {
 	s := &Server{}
+	for _, o := range option {
+		o(s)
+	}
 	return s
 }
 
